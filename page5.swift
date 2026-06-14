@@ -1,0 +1,87 @@
+import SwiftUI
+
+struct page5: View {
+    @Environment(\.dismiss) var dismiss  // ✅ هذا يخلي الزر يقدر يرجع
+
+    var body: some View {
+       // NavigationView {
+            ZStack {
+                Image("background")
+                    .resizable()
+                    .scaledToFill()
+                    .ignoresSafeArea()
+                
+                VStack {
+                    Spacer()
+                    Text("حمارة القايلة")
+                        .font(.system(size: 28, weight: .semibold))
+                        .foregroundColor(.black)
+                        .padding(.top, 40)
+                    
+                    Spacer()
+                    
+                    Image("boyImage")
+                        .resizable()
+                        .scaledToFill()
+                        .frame(width: 300, height: 300)
+                        .clipShape(RoundedRectangle(cornerRadius: 40))
+                    
+                    Text("""
+
+كان يا ما كان في صيفنا الحار، ولد شاطر
+ لكنّه شقي شوي اسمه سلمان.
+كل أهل الحارة يعرفون أن وقت الظهرية
+ يوم تصير الشمس تلسع وحارة مرّة
+ (وهذا الوقت يسمونه القَايْلَة)
+ لازم الكل ينام في البيت.
+""")
+                    .font(.system(size: 18))
+                    .multilineTextAlignment(.center)
+                    .lineSpacing(5)
+                    .padding(.horizontal, 30)
+                    
+                    Spacer()
+                    
+                    HStack(spacing: 16) {
+                        // الزر الاول - ارجع
+                        Button(action: {
+                            dismiss() // ✅ هنا يتم الرجوع للصفحة السابقة
+                        }) {
+                            Text("ارجع")
+                                .foregroundColor(.gray)
+                        }
+                        .frame(width: 140, height: 45)
+                        .background(Color.white)
+                        .cornerRadius(25)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 25)
+                                .stroke(Color.gray.opacity(0.4))
+                        )
+                        
+                        // الزر الثاني - كمّل
+                        NavigationLink(destination: page6()) {
+                            Text("كمّل")
+                                .fontWeight(.bold)
+                                .foregroundColor(.white)
+                                .frame(width: 140, height: 45)
+                                .background(Color(red: 0.3, green: 0.4, blue: 0.4))
+                                .cornerRadius(30)
+                                .shadow(color: Color.black.opacity(0.2), radius: 10, x: 0, y: 8)
+                        }
+                        .padding(.vertical, 40)
+                    }
+                    
+                    Text("TEAM 404")
+                        .font(.system(size: 12, weight: .medium))
+                        .foregroundColor(.gray)
+                        .padding(.top, 8)
+                        .padding(.bottom, 30)
+                }
+            }
+       // }//nav
+    }
+}
+
+#Preview {
+    page5()
+}
